@@ -48,3 +48,15 @@ client.on('messageDelete', async (deletedMessage) => {
 
 
 client.login(process.env.TOKEN);
+
+
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("Bot is running!");
+});
+
+app.listen(3000, () => {
+  console.log("Feelings Bot is live on port 3000");
+});
