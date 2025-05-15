@@ -23,9 +23,10 @@ client.on('messageCreate', async (message) => {
 
   // نرسل صورة الفاصل بعد 3 ثواني
   setTimeout(async () => {
-    const divider = await message.channel.send({
-      files: ['./assets/nexo1.jpn']
-    });
+   const divider = await message.channel.send({
+  files: ['./assets/nexol.jpg']
+  });
+
 
     // نخزن معرف رسالة العضو وربطها مع الفاصل
     messageMap.set(message.id, divider.id);
