@@ -24,7 +24,7 @@ client.on('messageCreate', async (message) => {
   // نرسل صورة الفاصل بعد 3 ثواني
   setTimeout(async () => {
     const divider = await message.channel.send({
-      files: ['./assets/feelings-divider.gif']
+      files: ['./assets/feelings-divider.jpg']
     });
 
     // نخزن معرف رسالة العضو وربطها مع الفاصل
