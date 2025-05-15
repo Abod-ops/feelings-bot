@@ -2,6 +2,8 @@
 
 const { Client, GatewayIntentBits } = require('discord.js');
 require('dotenv').config();
+const path = require('path');
+const express = require('express');
 
 const client = new Client({
   intents: [
@@ -23,13 +25,16 @@ client.on('messageCreate', async (message) => {
 
   // نرسل صورة الفاصل بعد 3 ثواني
   setTimeout(async () => {
-   const divider = await message.channel.send({
-  files: ['./assets/nexol.jpg']
-  });
+    try {
+      const divider = await message.channel.send({
+        files: [path.join(__dirname, 'assets', 'nexo1.jpg')],
+      });
 
-
-    // نخزن معرف رسالة العضو وربطها مع الفاصل
-    messageMap.set(message.id, divider.id);
+      // نخزن معرف رسالة العضو وربطها مع الفاصل
+      messageMap.set(message.id, divider.id);
+    } catch (err) {
+      console.error('❌ خطأ أثناء إرسال صورة الفاصل:', err.message);
+    }
   }, 3000);
 });
 
@@ -42,16 +47,16 @@ client.on('messageDelete', async (deletedMessage) => {
       await msg.delete();
       messageMap.delete(deletedMessage.id); // نحذف الربط من الذاكرة
     } catch (err) {
-      console.error('خطأ في حذف الفاصل:', err.message);
+      console.error('❌ خطأ في حذف الفاصل:', err.message);
     }
   }
 });
 
-
 client.login(process.env.TOKEN);
 
-
-const express = require("express");
+// =====================
+// Express server for uptime monitoring
+// =====================
 const app = express();
 
 app.get("/", (req, res) => {
@@ -59,5 +64,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(3000, () => {
-  console.log("Feelings Bot is live on port 3000");
+  console.log("🌐 Feelings Bot is live on port 3000");
 });
